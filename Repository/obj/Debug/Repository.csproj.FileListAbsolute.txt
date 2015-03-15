@@ -1,0 +1,18 @@
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\bin\Debug\Repository.dll.config
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\bin\Debug\Repository.dll
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\bin\Debug\Repository.pdb
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\bin\Debug\EntityFramework.dll
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\bin\Debug\EntityFramework.xml
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\obj\Debug\Repository.dll
+C:\Users\bbarbosa\documents\visual studio 2013\Projects\DrakeProject\Repository\obj\Debug\Repository.pdb
+C:\Projects\X2Docs\Repository\bin\Debug\Repository.dll.config
+C:\Projects\X2Docs\Repository\bin\Debug\Repository.dll
+C:\Projects\X2Docs\Repository\bin\Debug\Repository.pdb
+C:\Projects\X2Docs\Repository\bin\Debug\EntityFramework.dll
+C:\Projects\X2Docs\Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Projects\X2Docs\Repository\bin\Debug\EntityFramework.xml
+C:\Projects\X2Docs\Repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Projects\X2Docs\Repository\obj\Debug\Repository.dll
+C:\Projects\X2Docs\Repository\obj\Debug\Repository.pdb

@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>X2 Docs</h1>
+    <p class="lead">Provides user to upload their documents and store it in a database for future retrieval and viewing the document(s) in browser.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="/home/upload" method="post" enctype="multipart/form-data">
+            <table style="width:100%;">
+                <tr>
+                    <td>
+                        <label for="uploadedFile">File:</label>
+                        <input type="file" name="uploadedFile" id="uploadedFile"  />
+                        <input type="text" name="txtUploadfilename" id="txtUploadfilename" />
+                        <input type="submit" value="Upload" />
+                    </td>
+                    <td align="right">
+                        <input type="text" name="SearchFile" id="txtSearch"  style="width:500px;" />
+                        <input type=text list=browsers>
+                        <datalist id=browsers>
+                            <option> Search By...
+                            <option> File Name
+                            <option> Date
+                            <option> Time
+                        </datalist>
+                        <input type="submit" value="search" />
+                    </td>
+                </tr>
+                <tr>
+                    <shadow></shadow>
+                </tr>
+            </table>
+            
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Type</th>
+                        <th>Preview</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.UploadedFiles)
+                    {
+                        <tr>
+                            <td>@item.FileName</td>
+                            <td>@item.FileType</td>
+                            <td>@Html.ActionLink("Preview", "PreviewFile", new { id = item.ID }, new { target = "_blank" })</td>
+                            <td>
+                                @using (Html.BeginForm("Delete", "Home", new { id = item.ID }, FormMethod.Post))
+                                {
+                                    <input type="submit" value="Delete">
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
