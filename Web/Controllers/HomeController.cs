@@ -16,26 +16,59 @@ namespace Web.Controllers
         private DrakeContext _ctx = new DrakeContext();
         private IUnitOfWork _unitOfWork;
 
+        const string ServerPath = @"C:\TEMP\";
+                
         public HomeController()
         {
             _unitOfWork = new UnitOfWork(_ctx);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string filter, string filterValue)
         {
-            var uploadedFiles = _unitOfWork.Repository<FileUpload>()
-                .Query()
-                .Get()
-                .Select(t => new FileUploadModel()
-                {
-                    ID = t.FileUploadID,
-                    FileName = t.FileName,
-                    FileType = t.FileType,
-                })
-                .ToList();
+            List<FileUploadModel> uploadedFiles = null;
 
-            ViewBag.UploadedFiles = uploadedFiles;
-            return View();
+            if (filter != null && filterValue != null)
+            {
+                if (filterValue == "filename")
+                    uploadedFiles = _unitOfWork.Repository<FileUpload>()
+                        .Query()
+                        .Filter(t => t.FileName.Contains(filter))
+                        .Get()
+                        .Select(t => new FileUploadModel()
+                        {
+                            ID = t.FileUploadID,
+                            FileName = t.FileName,
+                            FileType = t.FileType,
+                        })
+                        .ToList();
+                else if (filterValue == "keyword")
+                    uploadedFiles = _unitOfWork.Repository<FileUpload>()
+                        .SelectQuery("uspTestStoredProc @FileName = {0}", filterValue)
+                        .Select(t => new FileUploadModel()
+                        {
+                            ID = t.FileUploadID,
+                            FileName = t.FileName,
+                            FileType = t.FileType,
+                        })
+                        .ToList();
+            }
+            else
+            {
+                uploadedFiles = _unitOfWork.Repository<FileUpload>()
+                    .Query()
+                    .Get()
+                    .Select(t => new FileUploadModel()
+                    {
+                        ID = t.FileUploadID,
+                        FileName = t.FileName,
+                        FileType = t.FileType,
+                    })
+                    .ToList();
+            }
+
+
+
+            return View(uploadedFiles);
         }
 
         [HttpPost]
@@ -64,7 +97,9 @@ namespace Web.Controllers
 
                 if (_unitOfWork.Save())
                 {
-                    // TODO: 
+                    // save file
+                    string nameAndLocation = ServerPath + uploadedFile.FileName;
+                    uploadedFile.SaveAs(nameAndLocation);
                 }
             }
                 
@@ -100,7 +135,9 @@ namespace Web.Controllers
 
             Dictionary<string, string> contentTypes = new Dictionary<string, string>();
             contentTypes.Add("pdf", "application/pdf");
+            contentTypes.Add("doc", "application/msword");
             contentTypes.Add("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            contentTypes.Add("xls", "application/vnd.ms-excel");
             contentTypes.Add("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             contentTypes.Add("html", "text/html");
             contentTypes.Add("txt", "text/plain");

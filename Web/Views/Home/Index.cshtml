@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Web.Models.FileUploadModel>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,40 +9,35 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
-        <form action="/home/upload" method="post" enctype="multipart/form-data">
-            <table style="width:100%;">
-                <tr>
-                    <td>
-                        <label for="uploadedFile">File:</label>
-                        <input type="file" name="uploadedFile" id="uploadedFile"  />
-                        <input type="text" name="txtUploadfilename" id="txtUploadfilename" />
-                        <input type="submit" value="Upload" />
-                    </td>
-                    <td align="right">
-                        <input type="text" name="SearchFile" id="txtSearch"  style="width:500px;" />
-                        <input type=text list=browsers>
-                        <datalist id=browsers>
-                            <option> Search By...
-                            <option> File Name
-                            <option> Date
-                            <option> Time
-                        </datalist>
-                        <input type="submit" value="search" />
-                    </td>
-                </tr>
-                <tr>
-                    <shadow></shadow>
-                </tr>
-            </table>
+    <div class="col-md-6">
+        @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { @Id = "FormUpload", enctype = "multipart/form-data" }))
+        {
+            <label for="uploadedFile">File:</label>
+            <input type="file" name="uploadedFile" id="uploadedFile" />
+
+            <input type="submit" value="Upload" />
+        }
+    </div>
+
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+            <label for="filter">Filter:</label>
+            <input type="text" name="filter" id="filter" />
+            <select name="filterValue" id="filterValue">
+                <option value="filename">File Name</option>
+                <option value="date">Date</option>
+                <option value="keyword">Key Word</option>
+            </select>
             
-        </form>
+            <input type="submit" value="Search" />
+        }
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12">
-        <div class="table-responsive">
+        <div id="data-grid" class="table-responsive">
             <table class="table table-bordered table-condensed table-striped">
                 <thead>
                     <tr>
@@ -52,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in ViewBag.UploadedFiles)
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <td>@item.FileName</td>
@@ -69,6 +65,5 @@
                 </tbody>
             </table>
         </div>
-
     </div>
 </div>

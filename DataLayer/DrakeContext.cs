@@ -15,7 +15,7 @@ namespace DataLayer
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DrakeContext, DataLayer.Migrations.Configuration>("DrakeConnection"));
         }
 
-        public new IDbSet<T> Set<T>() where T : class
+        public new DbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();
         }

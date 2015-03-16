@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Repository
 {
@@ -10,6 +11,7 @@ namespace Repository
         void Delete(object id);
         void Delete(TEntity entity);
         void Insert(TEntity entity);
+        IQueryable<TEntity> SelectQuery(string query, params object[] parameters);
         IRepositoryQuery<TEntity> Query();
         Guid InstanceId { get; }
     }

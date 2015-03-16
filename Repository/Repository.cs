@@ -10,7 +10,7 @@ namespace Repository
     {
         private readonly Guid _instanceId;
         internal IDbContext Context;
-        internal IDbSet<TEntity> DbSet;
+        internal DbSet<TEntity> DbSet;
 
         public Repository(IDbContext context)
         {
@@ -55,6 +55,11 @@ namespace Repository
         public virtual void Insert(TEntity entity)
         {
             DbSet.Attach(entity);
+        }
+
+        public virtual IQueryable<TEntity> SelectQuery(string query, params object[] parameters)
+        {
+            return DbSet.SqlQuery(query, parameters).AsQueryable();
         }
 
         public virtual IRepositoryQuery<TEntity> Query()

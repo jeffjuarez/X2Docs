@@ -8,7 +8,7 @@ namespace Repository
 {
     public interface IDbContext
     {
-        IDbSet<T> Set<T>() where T : class;
+        DbSet<T> Set<T>() where T : class;
         int SaveChanges();
         void Dispose();
         IEnumerable<DbEntityValidationResult> GetValidationErrors();
