@@ -1,4 +1,4 @@
-# DrakeProject
+# DrakeX2
 Drake X2 Docs project
 
 THE ARCHITECTURE 
